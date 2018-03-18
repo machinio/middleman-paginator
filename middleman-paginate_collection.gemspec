@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Your Name"]
   s.email       = ["email@example.com"]
-  s.homepage    = "hgttp://example.com"
+  s.homepage    = "http://example.com"
   s.summary     = %q{A short summary of your extension}
   s.description = %q{A longer description of your extension}
 
