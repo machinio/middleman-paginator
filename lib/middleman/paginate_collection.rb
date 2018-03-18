@@ -1,8 +1,8 @@
-# Require core library
 require 'middleman-core'
 
-class PaginateCollection < ::Middleman::Extension
+class PaginateCollection < ::Middleman::ConfigExtension
    self.resource_list_manipulator_priority = 0
+
   expose_to_config :paginate
 
   option :per_page, 20, 'Controls pagination'
@@ -20,11 +20,11 @@ class PaginateCollection < ::Middleman::Extension
     end
   end
 
-  def paginate(destination:, collection:, template:, **page_options)
+  def paginate(destination:, objects:, template:, **page_options)
     descriptors = []
 
-    collection.each_slice(options.per_page).with_index(1).reverse_each do |o, i|
-      paginate_options = { locals: { collection: o, page: i, destination: destination } }
+    objects.each_slice(options.per_page).with_index(1).reverse_each do |o, i|
+      paginate_options = { locals: { objects: o, page: i, destination: destination } }
       path = i == 1 ? 'index.html' : "pages/#{i}.html"
 
       descriptor = Middleman::Sitemap::Extensions::ProxyDescriptor.new(
