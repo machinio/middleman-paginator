@@ -47,7 +47,7 @@ class Paginator < ::Middleman::ConfigExtension
       path = if page == 2
         "#{@locs[:destination]}index.html"
       else
-        "#{@locs[:destination]}pages/#{page - 1}"
+        "#{@locs[:destination]}pages/#{page - 1}.html"
       end
 
       link_to 'Previous', path, class: 'page-link'
