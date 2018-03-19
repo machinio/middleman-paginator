@@ -1,6 +1,6 @@
 require 'middleman-core'
 
-class PaginateCollection < ::Middleman::ConfigExtension
+class Paginator < ::Middleman::ConfigExtension
    self.resource_list_manipulator_priority = 0
 
   expose_to_config :paginate
