@@ -58,4 +58,4 @@ Inside `template`, iterate over `per_page` number of `objects`
 
 ### Helpers
 
-Paginator provides to helper methods: `previous_page_link`, `next_page_link`. They supposed to just work.
+Paginator provides to helper methods: `previous_page_link`, `next_page_link`. They work like `link_to` helper and support same arguments.
