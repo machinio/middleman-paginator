@@ -1,4 +1,4 @@
-module Paginator::LinkHelpers
+module LinkHelpers
   PAGES_COUNT = 5
 
   def previous_page_link(text: 'Previous', **options)
@@ -36,23 +36,19 @@ module Paginator::LinkHelpers
     link_to text, path, **options
   end
 
-  def pages(**options)
+  def pages
     last = @locs[:paginator][:last_page]
     current = @locs[:paginator][:page]
     spread = 2
 
-    first_page = current <= 2 : 1 ? current - spread
+    first_page = current <= 2 ? 1 : current - spread
     last_page = current >= last - spread ? last : current + spread
 
-    (first_page..last_page).map do |page_number|
-      link_to_page(page: page_number, **options)
+    (first_page..last_page).each do |page_number|
+      page_name = page_number == 1 ? "index.html" : "pages/#{page_number}.html"
+      path = @locs[:paginator][:destination] + page_name
+
+      yield(page_number, path)
     end
-  end
-
-  def link_to_page(page:, text: page, **options)
-    page_name = page == 1 ? "index.html" : "#{page}.html"
-    path = "#{@locs[:paginator][:destination]}#{page_name}"
-
-    link_to text, path, **options
   end
 end
