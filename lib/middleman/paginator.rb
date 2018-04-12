@@ -23,15 +23,15 @@ class Paginator < ::Middleman::ConfigExtension
   def paginate(destination:, objects:, template:, **page_options)
     descriptors = []
 
-    slices = objects.each_slice(options.per_page)
-    slices.with_index(1).reverse_each do |o, i|
-      paginate_options = { paginator: { objects: o, page: i, destination: destination } }
+    pages = objects.each_slice(options.per_page)
+    pages.with_index(1).reverse_each do |o, i|
+      paginate_options = { objects: o, page: i, destination: destination , last_page: pages.count }
       path = i == 1 ? 'index.html' : "pages/#{i}.html"
 
       descriptor = Middleman::Sitemap::Extensions::ProxyDescriptor.new(
         ::Middleman::Util.normalize_path("#{destination}#{path}"),
         ::Middleman::Util.normalize_path(template),
-        page_options.merge(locals: paginate_options) { |key, v1, v2| v1.merge v2 }
+        page_options.merge(locals: { paginator: paginate_options }) { |key, v1, v2| v1.merge v2 }
       )
 
       descriptors << descriptor
