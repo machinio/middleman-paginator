@@ -1,7 +1,7 @@
 require "middleman-core"
 
 Middleman::Extensions.register :paginator do
-  require "middleman/paginator"
+  require 'middleman/paginator'
 
-  Paginator
+  Paginator::Core
 end

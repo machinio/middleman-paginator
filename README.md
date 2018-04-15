@@ -48,7 +48,7 @@ paginate(
 Inside `template`, iterate over `per_page` number of `objects`
 
 ```haml
-  - objects.each do |object|
+  - paginator[:objects].each do |object|
     // render object 
 
   = previous_page_link
@@ -56,6 +56,19 @@ Inside `template`, iterate over `per_page` number of `objects`
 
 ```
 
+As you might've noticed paginator injects local variable called `paginator`. With following helpful data: `objects`, `page`, `destination`, `last_page`
+
 ### Helpers
 
-Paginator provides to helper methods: `previous_page_link`, `next_page_link`. They work like `link_to` helper and support same arguments.
+Paginator provides a few helper methods:
+  * `last_page_link`
+  * `previous_page_link`
+  * `next_page_link`
+  * `last_page_link`
+  * `pages`
+They work like `link_to` helper and support same the arguments.
+
+Here is an example with bootstrap styles:
+
+```haml
+```
