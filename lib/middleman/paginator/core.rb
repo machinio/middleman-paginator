@@ -1,5 +1,5 @@
 class Paginator::Core < ::Middleman::ConfigExtension
-  helpers LinkHelpers
+  helpers Paginator::LinkHelpers
 
   self.resource_list_manipulator_priority = 0
 
