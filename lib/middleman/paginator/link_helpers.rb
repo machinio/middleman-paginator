@@ -1,4 +1,4 @@
-module LinkHelpers
+module Paginator::LinkHelpers
   PAGES_COUNT = 5
 
   def previous_page_link(text: 'Previous', **options)
