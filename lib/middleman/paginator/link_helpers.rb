@@ -1,6 +1,6 @@
-module Paginator::LinkHelpers
-  PAGES_COUNT = 5
+require 'middleman/paginator/pages_group'
 
+module Paginator::LinkHelpers
   def previous_page_link(text: 'Previous', **options)
     page = @locs[:paginator][:page]
     return if page == 1
@@ -36,16 +36,13 @@ module Paginator::LinkHelpers
     link_to text, path, **options
   end
 
-  def pages
-    last = @locs[:paginator][:last_page]
-    current = @locs[:paginator][:page]
-    spread = 2
+  def pages(count: 5)
+    pages_group = Paginator::PagesGroup.new(
+      current: @locs[:paginator][:page], last: @locs[:paginator][:last_page], count: count
+    )
 
-    first_page = current <= 2 ? 1 : current - spread
-    last_page = current >= last - spread ? last : current + spread
-
-    (first_page..last_page).each do |page_number|
-      page_name = page_number == 1 ? "index.html" : "pages/#{page_number}.html"
+    pages_group.generate do |page_number|
+      page_name = page_number == 1 ? 'index.html' : "pages/#{page_number}.html"
       path = @locs[:paginator][:destination] + page_name
 
       yield(page_number, path)
