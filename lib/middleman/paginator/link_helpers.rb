@@ -45,7 +45,7 @@ module Paginator::LinkHelpers
       page_name = page_number == 1 ? 'index.html' : "pages/#{page_number}.html"
       path = @locs[:paginator][:destination] + page_name
 
-      yield(page_number, path)
+      yield(page_number, path) if block_given?
     end
   end
 end
