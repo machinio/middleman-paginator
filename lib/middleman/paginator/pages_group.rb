@@ -32,7 +32,12 @@ class Paginator::PagesGroup
       return last if pagination_ending?
       right_half_count = current + right_spread
       left_half_count = left_spread - current + 1
-      return right_half_count + left_half_count if pagination_beginning?
+
+      if pagination_beginning?
+        tail_pages = right_half_count + left_half_count
+        return tail_pages > last ? last : tail_pages
+      end
+
       right_half_count
     end
   end
