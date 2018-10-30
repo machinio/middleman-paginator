@@ -68,7 +68,27 @@ Paginator provides a few helper methods:
   * `pages`
 They work like `link_to` helper and support same the arguments.
 
-Here is an example with bootstrap styles:
+Here is a haml example with bootstrap styles:
 
 ```haml
+- if pages.count > 1
+  %ul.pagination
+    - prev_link = previous_page_link text: '<', class: 'page-link'
+    - next_link = next_page_link text: '>', class: 'page-link'
+
+    %li.page-item{ class: ('disabled' if prev_link.blank?) }
+      - if prev_link
+        = prev_link
+      - else
+        .page-link <
+
+    - pages do |page, destination|
+      %li.page-item{ class: ('active' if page == paginator[:page]) }
+        = link_to page, destination, class: 'page-link'
+
+    %li.page-item{ class: ('disabled' if next_link.blank?) }
+      - if next_link
+        = next_link
+      - else
+        .page-link >
 ```
